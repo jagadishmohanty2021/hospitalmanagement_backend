@@ -1,32 +1,68 @@
-# hospitalmanagement_backend
+# 🚀 Hospital Management Backend API
 
-🚀 Auth API Documentation
+A Node.js + Express + MongoDB backend system with authentication and user management.
 
-This document describes the authentication endpoints for the backend service.
+---
 
-Base URL:
+## 📌 Base URL
+
 
 http://localhost:5000/api/v1
-🔐 Authentication
-📌 Login API
+
+
+---
+
+# 🔐 Authentication APIs
+
+## 📝 Register User
+
+### Endpoint
+
+
+POST /auth/register
+
+
+### Full URL
+
+
+http://localhost:5000/api/v1/auth/register
+
+
+### Request Body
+
+```json
+{
+  "name": "Jagadish Mohanty",
+  "email": "jagadish@example.com",
+  "password": "Test@1234"
+}
+Success Response (201)
+{
+  "success": true,
+  "statusCode": 201,
+  "message": "User registered successfully",
+  "data": {
+    "_id": "6a2e7f010ea6c739b2bc809e",
+    "name": "Jagadish Mohanty",
+    "email": "jagadish@example.com",
+    "role": "user",
+    "isEmailVerified": false,
+    "createdAt": "2026-06-14T10:14:25.625Z",
+    "updatedAt": "2026-06-14T10:14:25.625Z",
+    "__v": 0
+  }
+}
+🔑 Login User
 Endpoint
 POST /auth/login
-
-Full URL:
-
+Full URL
 http://localhost:5000/api/v1/auth/login
-📥 Request Body
-
-Send JSON in the following format:
-
+Request Body
 {
   "email": "test@example.com",
   "password": "Test@1234"
 }
-📤 Success Response
-
-Status Code: 200 OK
-
+Success Response (200)
 {
   "success": true,
   "statusCode": 200,
@@ -40,94 +76,21 @@ Status Code: 200 OK
       "isEmailVerified": false,
       "createdAt": "2026-06-14T10:01:23.792Z",
       "updatedAt": "2026-06-14T10:31:36.584Z",
-      "__v": 0,
       "lastLoginAt": "2026-06-14T10:31:36.583Z"
     },
-    "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9....",
-    "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...."
+    "accessToken": "YOUR_ACCESS_TOKEN",
+    "refreshToken": "YOUR_REFRESH_TOKEN"
   }
 }
-
-
-👤 User Authentication API
-📌 Register API
+👤 User APIs
+📄 Get User Profile
 Endpoint
-POST /auth/register
-
-Full URL:
-
-http://localhost:5000/api/v1/auth/register
-📥 Request Body
-
-Send JSON in the following format:
-
-{
-  "name": "Jagadish Mohanty",
-  "email": "jagadish@example.com",
-  "password": "Test@1234"
-}
-📤 Success Response
-
-Status Code: 201 Created
-
-{
-  "success": true,
-  "statusCode": 201,
-  "message": "User registered successfully",
-  "data": {
-    "name": "Jagadish Mohanty",
-    "email": "jagadish@example.com",
-    "role": "user",
-    "isEmailVerified": false,
-    "_id": "6a2e7f010ea6c739b2bc809e",
-    "createdAt": "2026-06-14T10:14:25.625Z",
-    "updatedAt": "2026-06-14T10:14:25.625Z",
-    "__v": 0
-  }
-}
-
-{
-	"success": true,
-	"statusCode": 200,
-	"message": "Profile fetched",
-	"data": {
-		"_id": "6a2e7bf3d9272c65e967f169",
-		"name": "Test User",
-		"email": "test@example.com",
-		"role": "user",
-		"isEmailVerified": false,
-		"createdAt": "2026-06-14T10:01:23.792Z",
-		"updatedAt": "2026-06-14T10:17:43.107Z",
-		"__v": 0,
-		"lastLoginAt": "2026-06-14T10:17:43.103Z"
-	}
-}
-
-
-👤 User Profile API
-📌 Get User Profile
-
-This endpoint returns the authenticated user’s profile details.
-
-🔗 Endpoint
 GET /users/profile
-
-Full URL:
-
+Full URL
 http://localhost:5000/api/v1/users/profile
-🔐 Headers (Required)
-
-You must include a valid JWT access token.
-
+Headers
 Authorization: Bearer <access_token>
-📥 Request Body
-
-No request body required.
-
-📤 Success Response
-
-Status Code: 200 OK
-
+Success Response (200)
 {
   "success": true,
   "statusCode": 200,
@@ -142,4 +105,27 @@ Status Code: 200 OK
     "updatedAt": "2026-06-14T10:14:25.625Z"
   }
 }
-
+⚠️ Common Error Responses
+Unauthorized
+{
+  "success": false,
+  "message": "Access token missing or invalid"
+}
+Token Expired
+{
+  "success": false,
+  "message": "Token expired or invalid"
+}
+🔐 Auth Flow
+Register → /auth/register
+Login → /auth/login
+Get Access Token
+Use in headers:
+Authorization: Bearer <token>
+🛠 Tech Stack
+Node.js
+Express.js
+MongoDB
+JWT Authentication
+Winston Logger
+Docker
